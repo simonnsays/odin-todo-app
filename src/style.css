@@ -145,5 +145,41 @@ dialog::backdrop {
 dialog .container {
     width: 80vw;
     max-width: 470px;
+    outline: none;
+}
+
+dialog .container * {
+    margin: 5px 0;
+    outline: none;
+}   
+
+#inputTitle{
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 5px 0;
+}
+
+[type="text"] {
+    border: none;
+}
+
+select, [type="date"] {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* height: 100px; */
+    padding: 5px;
+}
+
+select,
+option {
+    background-color: var(--color-surface);
+}
+
+.modal-buttons > button {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border: none;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 5px;
 }
 

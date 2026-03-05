@@ -41,7 +41,37 @@
             </div>
         </main>
         <dialog>
-            <div class="container">Hello World</div>
+            <div class="container">
+                <div>
+                    <input type="text" name="todo_Title" id="inputTitle">
+                </div>
+                <div>
+                    <input type="text" name="todo_Description" id="inputDesc">
+                </div>
+                <input type="date" name="todo_DueDate" id="inputDue">
+                <select name="todo_Priority" id="prio" place>
+                    <option value="" disabled selected>Priority</option>
+                    <option value="low">
+                        Low
+                    </option>
+                    <option value="med">
+                        Medium
+                    </option>
+                    <option value="high">
+                        High
+                    </option>
+                </select>
+                <select name="todo_Destination" id="destination">
+                     <option value=""> New Project</option>
+                    <option value="">Skills</option>
+                </select>
+
+
+                <div class="modal-buttons">
+                    <button id="cancel"> Cancel</button>
+                    <button id="addTask">Add Task</button>
+                </div>
+            </div>
         </dialog>
     </div>
 </body>

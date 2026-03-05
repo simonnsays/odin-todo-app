@@ -22,4 +22,5 @@ console.log(newProject.getList())
 addBtn.addEventListener('click', () => {
     dialog.showModal()
 })
+dialog.showModal()
 
