@@ -1,40 +1,25 @@
-class Todo {
-    constructor(id, title, description, dueDate, priority) {
-        this.id = id
-        this.title = title
-        this.description = description
-        this.dueDate = dueDate
-        this.priority = priority
-    }
-}
+import "./style.css"
+import Project from "./scripts/Project.js"
+import Todo from "./scripts/Todo.js"
 
-class Project {
-    constructor(name) {
-        this.name = name
-        this.items = []
-    }
-
-    addToDo(id, title, description, dueDate, priority) {
-        this.items.push(new Todo(id, title, description, dueDate, priority))
-    }
-
-    getList() {
-        return this.items
-    }
-}
-
-const createId = () => {
-    return crypto.randomUUID()
-}
-
+const dialog = document.querySelector('dialog')
+const addBtn = document.querySelector('#addToDo')
 
 const newProject = new Project('Reading')
-newProject.addToDo(
-    createId(), 
+const newTodo = (id) => new Todo (
     'Grab a book', 
     'Get the fee from the desk, get the latest version',
-    '10 / 25',
-    true
+    new Date(2026, 13, 4),
+    true, 
+    id
 )
-
+newProject.addToDo(newTodo())
+newProject.addToDo(newTodo(2))
+newProject.removeToDo(2)
 console.log(newProject.getList())
+
+
+addBtn.addEventListener('click', () => {
+    dialog.showModal()
+})
+
