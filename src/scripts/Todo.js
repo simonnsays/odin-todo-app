@@ -15,7 +15,7 @@ class Todo {
     }
 
     toggleComplete() {
-        this.state = !this.state
+        this.isComplete = !this.isComplete
     }
 }
 

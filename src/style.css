@@ -25,7 +25,9 @@ p {
 img {
     height: 100%;
 }
-
+button {
+    cursor: pointer;
+}
 .page-container {
     display: flex;
 }
@@ -34,15 +36,12 @@ nav {
     background-color: var(--color-surface-elevated);
     height: 100vh;
     width: 240px;
-    /* padding: 10px; */
 }
 
 nav button {
     border: 0;
     margin: 0;
     background-color: var(--color-surface-elevated);
-    padding: 8px 10px;
-    /* color: var(--color-primary); */
 }
 
 nav button:hover {
@@ -57,6 +56,8 @@ nav button:hover {
     align-items: center;
     gap: 10px;
     margin: 10px;
+    padding: 5px 5px 5px 0px;
+
 }
 
 .profile .icon {
@@ -75,34 +76,36 @@ nav button:hover {
 #addToDo {
     width: calc(100% - 20px);
     height: 40px;
-    margin: 10px;
-    margin-top: 30px;
+    margin: 0 10px;
+    margin-top: 20px;
     font-size: 18px;
     display: flex;
     align-items: center;
     gap: 5px;
-    /* background-color: black; */
+    padding: 25px 0;
 }
 
 #addToDo .icon {
     height: 40px;
 }
 
-.projects {
+.projects-container {
     margin: 10px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
-.projects > * {
+#projectHeader {
+    font-weight: 600;
+    font-size: 1rem;
+    width: 100%;
+    text-align: start;
+}
+
+.projects > *, #projectHeader {
     height: 35px;
 }
 
-.projects > h3 {
-    margin-bottom: 0;
-}
-
 .project {
-    /* height: 40px; */
     width: calc(100%);
     display: flex;
     align-items: center;
@@ -151,6 +154,7 @@ dialog .container {
 dialog .container * {
     margin: 5px 0;
     outline: none;
+    /* background-color: beige; */
 }   
 
 #inputTitle{
@@ -165,7 +169,7 @@ dialog .container * {
 
 select, [type="date"] {
     border: 1px solid rgba(0, 0, 0, 0.1);
-    /* height: 100px; */
+    border-radius: 5px;
     padding: 5px;
 }
 
@@ -174,12 +178,63 @@ option {
     background-color: var(--color-surface);
 }
 
-.modal-buttons > button {
+dialog .container .bottom {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    margin: 10px 0 0 0;
+    position: relative;
+    /* background-color: #1C2541; */
+}
+
+.project-select > #addProject, #projectConfirm {
+    border: none;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0 5px;
+    padding: 0;
+}
+
+#projectConfirm {
+    margin-right: 5px;
+}
+
+.input-container {
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .4);
+    padding: 0 5px;
+    max-width: 140px;
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+#newProjectInput {
+    padding: 5px;
+
+    width: 100%;
+}
+
+.bottom > .buttons {
+    position: absolute;
+    right: 0;
+    justify-self: end;
+}
+
+.buttons > button {
     background-color: var(--color-primary);
     color: var(--color-surface);
     border: none;
     padding: 10px;
     font-weight: 600;
-    border-radius: 5px;
+    border-radius: 5px;}
+
+.hb {
+    border: 1px solid rgba(0, 0, 0, .1);
 }
 
