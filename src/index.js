@@ -3,8 +3,7 @@ import poundIcon from './asset/pound.svg'
 import Project from "./scripts/Project.js"
 import Todo from "./scripts/Todo.js"
 
-const projectsEl = document.querySelector('.projects')
-
+// Logic
 const projects = []
 
 const genProject = new Project('General')
@@ -20,7 +19,10 @@ newProject.addToDo(newTodo())
 projects.push(genProject)
 projects.push(newProject)
 
-function createProjectNavEl(project) {
+
+// Nav
+const projectsElNav = document.querySelector('.projects-container-nav .projects')
+const createProjectNavEl = (project) => {
     const button = document.createElement('button')
     button.className = 'project'
 
@@ -40,13 +42,55 @@ function createProjectNavEl(project) {
 }
 
 projects.forEach(project => {
-    console.log(project)
-    console.log(createProjectNavEl(project))
-    projectsEl.appendChild(createProjectNavEl(project))
+    projectsElNav.appendChild(createProjectNavEl(project))
 })
 
+// Content
+const page = document.querySelector('.content')
+const createMyProjectsPage = (projects, parentEl) => {
+    const header = document.createElement('h1')
+    header.textContent = 'My Projects'
 
+    const countContainer = document.createElement('div')
+    countContainer.className = 'count-container'
+    const countText = document.createElement('p')
+    countText.textContent = `${projects.length} projects`
+    countContainer.appendChild(countText)
+    const hb = document.createElement('div')
+    hb.className = 'hb'
+    countContainer.appendChild(hb)
 
+    const projectsContainer = document.createElement('div')
+    projectsContainer.className = 'projects-container-page'
+    projects.forEach(project => {
+        projectsContainer.appendChild(createProjectEl(project))
+    })
+
+    parentEl.appendChild(header)
+    parentEl.appendChild(countContainer)
+    parentEl.appendChild(projectsContainer)
+}
+
+const createProjectEl = (project) => {
+    const button = document.createElement('button')
+    button.className = 'project'
+
+    const icon = document.createElement('div')
+    icon.className = 'icon'
+    const img = document.createElement('img')
+    img.src = poundIcon
+    icon.appendChild(img)
+
+    const text = document.createElement('p')
+    text.textContent = project.name
+
+    button.appendChild(icon)
+    button.appendChild(text)
+
+    return button
+}
+
+createMyProjectsPage(projects, page)
 
 
 // MODAL
@@ -64,7 +108,7 @@ const newProjectElements = {
 addBtn.addEventListener('click', () => {
     dialog.showModal()
 })
-dialog.showModal()
+// dialog.showModal()
 
 cancelBtn.addEventListener('click', () => {
     dialog.close()
