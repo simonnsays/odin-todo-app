@@ -45,20 +45,15 @@ const el = (type, options = {}) => {
 // Nav
 const projectsElNav = document.querySelector('.projects-container-nav .projects')
 const createProjectNavEl = (project) => {
-    const button = el('button')
-    button.className = 'project'
+    const button = el('button', {class: 'project'})
 
-    const icon = el('div')
-    icon.className = 'icon'
-    const img = el('img')
-    img.src = poundIcon
+    const icon = el('div', {class: 'icon'})
+    const img = el('img', {src: poundIcon})
     icon.appendChild(img)
 
-    const name = el('p')
-    name.textContent = project.name
+    const name = el('p', {text: project.name})
 
-    button.appendChild(icon)
-    button.appendChild(name)
+    button.append(icon, name)
  
     return button
 }
@@ -72,19 +67,14 @@ const page = document.querySelector('.content')
 const createProjectListPage = (projects) => {
     const container = el('div')
     
-    const header = el('h1')
-    header.textContent = 'My Projects'
+    const header = el('h1', {text: 'My Projects'})
 
-    const countContainer = el('div')
-    countContainer.className = 'count-container'
-    const countText = el('p')
-    countText.textContent = `${projects.length} projects`
-    const hb = el('div')
-    hb.className = 'hb'
+    const countContainer = el('div', {class: 'count-container'})
+    const countText = el('p', {text: `${projects.length} projects`})
+    const hb = el('div', {class: 'hb'})
     countContainer.append(countText, hb)
 
-    const projectsContainer = el('div')
-    projectsContainer.className = 'projects-container-page'
+    const projectsContainer = el('div', {class: 'projects-container-page'})
     projects.forEach(project => {
         projectsContainer.appendChild(createProjectButton(project))
     })
@@ -94,20 +84,15 @@ const createProjectListPage = (projects) => {
 }
 
 const createProjectButton = (project) => {
-    const button = el('button')
-    button.className = 'project'
+    const button = el('button', {class: 'project'})
 
-    const icon = el('div')
-    icon.className = 'icon'
-    const img = el('img')
-    img.src = poundIcon
+    const icon = el('div', {class: 'icon'})
+    const img = el('img', {src: poundIcon})
     icon.appendChild(img)
 
-    const text = el('p')
-    text.textContent = project.name
+    const text = el('p', {text: project.name})
 
-    button.appendChild(icon)
-    button.appendChild(text)
+    button.append(icon, text)
 
     return button
 }
@@ -164,8 +149,8 @@ const createTodoEl = (todo) => {
 }
 
 
-page.appendChild(createProjectListPage(projects))
-// page.appendChild(createProjectPage(projects[0]))
+// page.appendChild(createProjectListPage(projects))
+page.appendChild(createProjectPage(projects[0]))
 
 
 // MODAL

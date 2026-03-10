@@ -119,6 +119,7 @@ nav button:hover {
     align-items: center;
     gap: 10px;
     padding-left: 10px;
+    font-size: .9rem;
 }
 
 .selected {
