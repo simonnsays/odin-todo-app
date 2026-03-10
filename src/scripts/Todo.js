@@ -17,6 +17,10 @@ class Todo {
     toggleComplete() {
         this.isComplete = !this.isComplete
     }
+
+    interpretDate() {
+        return format(this.dueDate, "dd MMM")
+    }
 }
 
 export default Todo
