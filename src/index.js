@@ -1,10 +1,12 @@
 import "./style.css"
-import poundIcon from './asset/pound.svg'
 import plusIcon from './asset/plus.svg'
+import poundIcon from './asset/pound.svg'
 import Project from "./scripts/Project.js"
 import Todo from "./scripts/Todo.js"
+import el from "./scripts/utils.js"
 
 // Logic
+const page = document.querySelector('.content')
 const projects = []
 
 const addProject = (name) => {
@@ -20,7 +22,7 @@ addProject('Fitness')
 const newTodo = (id) => new Todo (
     'Grab a book', 
     'Get the fee from the desk, get the latest version',
-    new Date(2026, 13, 4),
+    new Date(2026, 3, 4),
     true, 
     id
 )
@@ -30,70 +32,22 @@ projects[0].addToDo(newTodo())
 projects[0].addToDo(newTodo())
 projects[0].addToDo(newTodo())
 
-// UTIL
-const el = (type, options = {}) => {
-    const element = document.createElement(type)
-    
-    if(options.class) element.className = options.class
-    if(options.text) element.textContent = options.text
-    if(options.src) element.src = options.src
-    if(options.onClick) element.addEventListener('click', options.onClick)
-
-    return element
-}
-
-// Nav
-const projectsElNav = document.querySelector('.projects-container-nav .projects')
-const createProjectNavEl = (project) => {
-    const button = el('button', {class: 'project'})
-
-    const icon = el('div', {class: 'icon'})
-    const img = el('img', {src: poundIcon})
-    icon.appendChild(img)
-
-    const name = el('p', {text: project.name})
-
-    button.append(icon, name)
- 
-    return button
-}
-
-projects.forEach(project => {
-    projectsElNav.appendChild(createProjectNavEl(project))
-})
-
-// Content
-const page = document.querySelector('.content')
-const createProjectListPage = (projects) => {
-    const container = el('div')
-    
-    const header = el('h1', {text: 'My Projects'})
-
-    const countContainer = el('div', {class: 'count-container'})
-    const countText = el('p', {text: `${projects.length} projects`})
-    const hb = el('div', {class: 'hb'})
-    countContainer.append(countText, hb)
-
-    const projectsContainer = el('div', {class: 'projects-container-page'})
-    projects.forEach(project => {
-        projectsContainer.appendChild(createProjectButton(project))
+// util
+const createProjectButton = (project, clickEvent) => {
+    if(clickEvent)console.log(clickEvent)
+    const button = el('button', {
+        class: 'project', 
+        onClick: () => clickEvent
     })
-
-    container.append(header, countContainer, projectsContainer)
-    return container
-}
-
-const createProjectButton = (project) => {
-    const button = el('button', {class: 'project'})
-
+    
     const icon = el('div', {class: 'icon'})
     const img = el('img', {src: poundIcon})
     icon.appendChild(img)
-
+    
     const text = el('p', {text: project.name})
-
+    
     button.append(icon, text)
-
+    
     return button
 }
 
@@ -125,8 +79,6 @@ const createProjectPage = (project) => {
 }
 
 const createTodoEl = (todo) => {
-    console.log(todo)
-    console.log(todo.title)
     const container = el('div')
 
     const todoBtn = el('button', {class: 'task-button'})
@@ -148,10 +100,54 @@ const createTodoEl = (todo) => {
     return container
 }
 
+// Nav
+const projectsElNav = document.querySelector('.projects-container-nav .projects')
+const navHeader = el('button', {
+    class: 'projectHeader',
+    text: 'My Projects',
+    onClick: () => showProjectsList
+})
+projectsElNav.appendChild(navHeader)
+projects.forEach((project, index) => {
+    projectsElNav.appendChild(createProjectButton(project, () => showProjectPage(index)))
+})
 
-// page.appendChild(createProjectListPage(projects))
-page.appendChild(createProjectPage(projects[0]))
+// Content
 
+const createProjectListPage = (projects) => {
+// function createProjectListPage(projects) {
+    const container = el('div')
+    
+    const header = el('h1', {text: 'My Projects'})
+
+    const countContainer = el('div', {class: 'count-container'})
+    const countText = el('p', {text: `${projects.length} projects`})
+    const hb = el('div', {class: 'hb'})
+    countContainer.append(countText, hb)
+
+    const projectsContainer = el('div', {class: 'projects-container-page'})
+    projects.forEach((project, index) => {
+        projectsContainer.appendChild(
+            createProjectButton(project, () => showProjectPage(index))
+        )
+    })
+
+    container.append(header, countContainer, projectsContainer)
+    return container
+}
+
+function showProjectsList() {
+    console.log('hit')
+    page.innerHTML = ""
+    page.appendChild(createProjectListPage(projects))
+}
+
+function showProjectPage(index) {
+    page.innerHTML = ""
+    page.appendChild(createProjectPage(projects[index]))
+}
+// page.appendChild(createProjectPage(projects[0]))
+// showProjectsList()
 
 // MODAL
 const dialog = document.querySelector('dialog')

@@ -102,14 +102,14 @@ nav button:hover {
     margin-top: 20px;
 }
 
-#projectHeader {
+.projectHeader {
     font-weight: 600;
     font-size: 1rem;
     width: 100%;
     text-align: start;
 }
 
-.projects > *, #projectHeader {
+.projects > *, .projectHeader {
     height: 35px;
 }
 
@@ -270,9 +270,13 @@ dialog .container .bottom {
 }
 
 .projects-container-page button {
-    background-color: var(--color-surface);
     margin: 10px 0;
     padding: 10px;
+}
+
+.projects-container-page button:hover {
+    background-color: var(--color-primary-light);
+    border-radius: 5px;
 }
 
 .tasks-container{
