@@ -6,7 +6,6 @@ const el = (type, options = {}) => {
     if(options.src) element.src = options.src
     if(options.onClick){
         element.addEventListener('click', options.onClick())
-        console.log(options.onClick)
     }
 
     return element
