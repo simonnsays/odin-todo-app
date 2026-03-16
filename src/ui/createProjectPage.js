@@ -1,7 +1,7 @@
 import createTodoEl from "./createTodoEl.js"
 import plusIcon from '../asset/plus.svg'
-import el from "../scripts/utils.js"
-
+import { el } from "../scripts/utils.js"
+import modal from "./addTodoModal.js"
 
 const createProjectPage = (project) => {
     const mainContainer = el('div')
@@ -20,8 +20,8 @@ const createProjectPage = (project) => {
     const icon = el('div', {class: 'icon'})
     const img = el('img', {src: plusIcon})
     icon.appendChild(img)
-
     const text = el('p', {text: 'Add todo'})
+    pageAddTodo.addEventListener('click', () => modal.showAddTodoDialog())
 
     pageAddTodo.append(icon, text)
 

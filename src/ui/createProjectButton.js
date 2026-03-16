@@ -1,11 +1,11 @@
 import poundIcon from '../asset/pound.svg'
-import el from '../scripts/utils.js'
+import { el } from '../scripts/utils.js'
 
 const createProjectButton = (project, clickEvent) => {
-    if(clickEvent)console.log(clickEvent)
+    // if(clickEvent)console.log(clickEvent)
     const button = el('button', {
         class: 'project', 
-        onClick: () => clickEvent
+        onClick: clickEvent
     })
     
     const icon = el('div', {class: 'icon'})

@@ -1,4 +1,4 @@
-import el from "../scripts/utils.js"
+import { el } from "../scripts/utils.js"
 
 const createTodoEl = (todo) => {
     const container = el('div')

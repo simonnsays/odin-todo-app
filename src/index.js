@@ -1,6 +1,6 @@
 import "./style.css"
-import { startUI } from "./ui/appRenderer.js";
+import UI from "./ui/appRenderer.js";
 
-startUI()
+UI.startApp()
 
 
