@@ -21,122 +21,59 @@
             </button>
             <div class="projects-container-nav">
                 <div class="projects">
-                    <!-- <button class="project">
-                        <div class="icon">
-                            <img src="./asset/pound.svg">
-                        </div>
-                        <p>Skills</p>
-                    </button>
-                    <button class="project selected">
-                        <div class="icon">
-                            <img src="./asset/pound.svg">
-                        </div>
-                        <p>Skills</p>
-                    </button> -->
                 </div>
             </div>
         </nav>
         <main>
             <div class="content">
-                <!-- <h1 class="header">My Projects</h1>
-                <div class="count-container">
-                    <p>5 projects</p>
-                    <div class="hb"></div>
-                </div>
-                <div class="projects-container-page">
-                    <button class="project">
-                        <div class="icon">
-                            <img src="./asset/pound.svg">
-                        </div>
-                        <p>General</p>
-                    </button>
-                    <button class="project">
-                        <div class="icon">
-                            <img src="./asset/pound.svg">
-                        </div>
-                        <p>Reading</p>
-                    </button>
-                </div> -->
-
-
-                <!-- <div>
-                    <h1 class="header">General</h1>
-                    <div class="tasks-container">
-                        <div>
-                            <button class="task-button">
-                                <div class="flag"></div>
-                                <div class="task">
-                                    <p class="title">Drag path memo</p>
-                                    <p class="desc">Create a skill based tracking</p>
-                                    <p class="due">10 Mar</p>
-                                </div>
-                            </button>
-                            <div class="hb"></div>
-                        </div>
-                        <div>
-                            <button class="task-button">
-                                <div class="flag"></div>
-                                <div class="task">
-                                    <p class="title">Drag path memo</p>
-                                    <p class="desc">Create a skill based tracking</p>
-                                    <p class="due">10 Mar</p>
-                                </div>
-                            </button>
-                            <div class="hb"></div>
-                        </div>
-                    </div>
-                    <button class="pageAddTask">
-                        <div class="icon">
-                            <img src="asset/plus.svg">
-                        </div>
-                        <p>Add todo</p>
-                    </button>
-                </div> -->
             </div>
         </main>
     </div>
-    <dialog>
+    <dialog class="create-dialog">
         <div class="container">
-            <div>
-                <input type="text" name="todo_Title" id="inputTitle" placeholder="Title">
-            </div>
-            <div>
-                <input type="text" name="todo_Description" id="inputDesc" placeholder="Description">
-            </div>
-            <input type="date" name="todo_DueDate" id="inputDue">
-            <select name="todo_Priority" id="prio" place>
-                <option value="" disabled selected>Priority</option>
-                <option value="low">
-                    Low
-                </option>
-                <option value="med">
-                    Medium
-                </option>
-                <option value="high">
-                    High
-                </option>
-            </select>
-            
-            <div class="hb"></div>
-            
-            <div class="bottom">
-                <div class="project-select">
-                    <select name="todo_Destination" id="destination">
-                        <option value="" disabled selected>New Project</option>
-                        <option value="">Skills</option>
-                    </select>
-                    <button id="addProject">+</button>
-                    <div class="input-container hidden">
-                        <input type="text" name="user_Project" id="newProjectInput">
-                        <button id="projectConfirm">+</button>
+            <form>
+                <div>
+                    <input type="text" name="todo_title" id="inputTitle" placeholder="Title" required>
+                </div>
+                <div>
+                    <input type="text" name="todo_description" id="inputDesc" placeholder="Description" required>
+                </div>
+                <input type="date" name="todo_dueDate" id="inputDue" required>
+                <select name="todo_Priority" id="prio" required>
+                    <option value="" disabled selected>Priority</option>
+                    <option value="low">
+                        Low
+                    </option>
+                    <option value="med">
+                        Medium
+                    </option>
+                    <option value="high">
+                        High
+                    </option>
+                </select>
+                
+                <div class="hb"></div>
+                
+                <div class="bottom">
+                    <div class="project-select">
+                        <select name="todo_Destination" id="destination" required>
+                        </select>
+                        <button type="button" id="addProject">+</button>
+                        <div class="input-container hidden">
+                            <input type="text" id="newProjectInput">
+                            <button type="button" id="projectConfirm">+</button>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" id="cancel"> Cancel</button>
+                        <button type="submit" id="addTask">Add Task</button>
                     </div>
                 </div>
-                <div class="buttons">
-                    <button id="cancel"> Cancel</button>
-                    <button id="addTask">Add Task</button>
-                </div>
-            </div>
+            </form>
         </div>
+    </dialog>
+    <dialog class="todo-dialog">
+        <div class="container"></div>
     </dialog>
 </body>
 </html>

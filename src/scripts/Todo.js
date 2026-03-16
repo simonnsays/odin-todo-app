@@ -1,11 +1,11 @@
-import { format } from "date-fns"
+import { format, parseISO } from "date-fns"
 
 class Todo {
     constructor(title, description, dueDate, priority, id = null) {
         this.id = id || crypto.randomUUID()
         this.title = title
         this.description = description
-        this.dueDate = format(dueDate, "M-dd-yyyy")
+        this.dueDate = format(parseISO(dueDate), "M-dd-yyyy")
         this.priority = priority
         this.isComplete = false
     }
@@ -19,7 +19,7 @@ class Todo {
     }
 
     interpretDate() {
-        return format(this.dueDate, "dd MMM")
+        return format(this.dueDate, "d MMM")
     }
 }
 

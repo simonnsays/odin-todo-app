@@ -4,6 +4,7 @@ import { el } from '../scripts/utils.js'
 const createProjectButton = (project, clickEvent) => {
     // if(clickEvent)console.log(clickEvent)
     const button = el('button', {
+        id: project.id,
         class: 'project', 
         onClick: clickEvent
     })

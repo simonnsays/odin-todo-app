@@ -1,4 +1,4 @@
-import { el } from "../scripts/utils.js"
+import { el, select } from "../scripts/utils.js"
 import appManager from "../logic/appManager.js"
 import createProjectButton from "./createProjectButton.js"
 import createProjectPage from "./createProjectPage.js"
@@ -7,7 +7,9 @@ import modal from "./addTodoModal.js"
 // const projects = appManager.getProjects()
 const page = document.querySelector('.content')
 let showingProjectsList = true
+let currentPage = {
 
+}
 const startApp = () => {
     showProjectsListPage()
     renderNav()
@@ -16,6 +18,8 @@ const startApp = () => {
     })
 
     if (showingProjectsList) showProjectsListPage()
+
+    select()
 }
 
 const renderNav = () => {
@@ -72,6 +76,7 @@ const showProjectsListPage = () => {
 }
 
 const showProjectPage = (index) => {
+    const projects = appManager.getProjects()
     page.innerHTML = ""
     page.appendChild(createProjectPage(projects[index]))
 }
