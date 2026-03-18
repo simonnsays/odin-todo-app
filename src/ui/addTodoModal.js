@@ -35,8 +35,12 @@ form.addEventListener('submit', (e) => {
     const projectId = select('#destination').value
 
     appManager.addTodo(data, projectId)
-    if(onProjectAdded) onProjectAdded()
-    console.log(appManager.getProjects())
+   
+    if(onProjectAdded) onProjectAdded(projectId)
+
+
+    form.reset()
+    dialog.close()
 })
 
 addTaskBtn.addEventListener('click', () => {
@@ -75,12 +79,15 @@ newProjEls.addBtn.addEventListener('click', () => {
 
 newProjEls.confirmBtn.addEventListener('click', () => {
     // add new project to the project list 
-    if(newProjEls.input.value === '') return
+    if(newProjEls.input.value === '') {
+        newProjEls.inputContainer.classList.add('hidden')
+        return
+    } 
 
     appManager.addProject(newProjEls.input.value)
     refillProjectOptions(appManager.getProjects())
 
-    newProjEls.inputContainer.innerHTML = ''
+    newProjEls.input.value = ''
     newProjEls.inputContainer.classList.add('hidden')
 
     // SIGNAL UI TO UPDATE PROJECT LISTS

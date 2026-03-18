@@ -8,18 +8,28 @@ import modal from "./addTodoModal.js"
 const page = document.querySelector('.content')
 let showingProjectsList = true
 let currentPage = {
-
+    type: 'list',
+    id: null
 }
+
 const startApp = () => {
     showProjectsListPage()
     renderNav()
     modal.init({
-        onProjectAdded: renderNav
+        onProjectAdded: renderPage
     })
 
     if (showingProjectsList) showProjectsListPage()
 
-    select()
+}
+
+const renderPage = (id = null) => {
+    renderNav()
+
+    const projects = appManager.getProjects()
+    const alteredProject = projects.find(project => project.id === id)
+    if(alteredProject?.id === currentPage.id) showProjectPage(projects.findIndex(project => project.id === alteredProject.id))
+    if(currentPage.type === 'list') showProjectsListPage()
 }
 
 const renderNav = () => {
@@ -71,14 +81,26 @@ const createProjectListPage = (projects) => {
 
 const showProjectsListPage = () => {
     const projects = appManager.getProjects()
+    currentPage = {
+        type: 'list',
+        id: null
+    }
     page.innerHTML = ""
     page.appendChild(createProjectListPage(projects))
+
+    console.log(currentPage)
 }
 
 const showProjectPage = (index) => {
     const projects = appManager.getProjects()
+    const currProject = projects[index]
+    currentPage = {
+        type: 'project',
+        id: currProject?.id
+    }
     page.innerHTML = ""
-    page.appendChild(createProjectPage(projects[index]))
+    page.appendChild(createProjectPage(currProject))
+    console.log(currentPage)
 }
 
 export default {

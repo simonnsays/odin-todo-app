@@ -6,8 +6,6 @@ const projects = []
 
 const addProject = (name) => {
     const newProject = new Project(name)
-    
-    console.log(newProject)
     projects.push(newProject)
 } 
 
@@ -29,6 +27,11 @@ const addTodo = (data, projectId) => {
         data.get('todo_priority'),
     ))     
 }
+
+addProject('General')
+// addProject('Reading')
+// addProject('Fitness')
+// addProject('Sleep')
 
 projects[0].addToDo(newTodo())
 // projects[0].addToDo(newTodo())
