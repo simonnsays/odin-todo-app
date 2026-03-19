@@ -170,10 +170,18 @@ dialog .container {
     outline: none;
 }
 
-dialog .container * {
+dialog .container > * {
     margin: 5px 0;
     outline: none;
 }   
+
+form > *{
+    margin: 10px 0;
+}
+
+.project-select > * {
+    margin: 5px 0;
+}
 
 #inputTitle{
     width: 100%;
@@ -348,4 +356,87 @@ dialog .container .bottom {
 
 .pageAddTask p {
     font-size: .9rem;
+}
+
+/* todo-dialog */
+
+.todo-dialog .container {
+    min-width: 40vw;
+    min-height: 65vh;
+    position: relative;
+    margin:0;
+    overflow: hidden;}
+
+.top {
+    width: 100%; 
+    display: flex;
+    height: 25px;
+    margin: 0;
+}
+
+.top button {
+    height: 100%;
+    background-color: var(--color-surface);
+    border: none;
+    outline: none;
+    margin-left: auto ;
+}
+
+.content {
+    overflow: auto;
+}
+
+.content .flag {
+    border: 2px solid salmon;
+    height: 18px;
+    width: 18px;
+    background-color: var(--color-surface);
+}
+
+.content .title {
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: 600;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10px;
+}
+
+.content .description {
+    margin-top: 5px;
+    font-size: .9rem;
+    line-height: 23px;
+    padding-bottom: 65px;
+    padding-left: 28px;
+
+}
+
+.todo-bottom {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    /* background-color: red; */
+}
+
+.todo-bottom .buttons{
+    margin-left: 10px;
+    display: flex;
+    gap: 20px;
+    /* background-color: blue; */
+}
+
+.todo-bottom > .buttons > button {
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 1rem;
+    display: grid;
+    place-content: center;
+    padding: 14px;
+    /* width: 50px; */
+
 }
