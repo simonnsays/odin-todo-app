@@ -2,7 +2,8 @@ import { el, select } from "../scripts/utils.js"
 import appManager from "../logic/appManager.js"
 import createProjectButton from "./createProjectButton.js"
 import createProjectPage from "./createProjectPage.js"
-import modal from "./addTodoModal.js"
+import addTodoModal from "./addTodoModal.js"
+import showTodoModal from "./showTodoModal.js"
 
 // const projects = appManager.getProjects()
 const page = document.querySelector('.content')
@@ -15,7 +16,7 @@ let currentPage = {
 const startApp = () => {
     showProjectsListPage()
     renderNav()
-    modal.init({
+    addTodoModal.init({
         onProjectAdded: renderPage
     })
 
@@ -61,7 +62,7 @@ const createProjectListPage = (projects) => {
     const header = el('h1', {text: 'My Projects'})
 
     const countContainer = el('div', {class: 'count-container'})
-    const countText = el('p', {text: `${projects.length} projects`})
+    const countText = el('p', {text: `${projects.length} ${projects.length > 1 ? 'projects' : 'project'}`})
     const hb = el('div', {class: 'hb'})
     countContainer.append(countText, hb)
 
@@ -87,8 +88,6 @@ const showProjectsListPage = () => {
     }
     page.innerHTML = ""
     page.appendChild(createProjectListPage(projects))
-
-    console.log(currentPage)
 }
 
 const showProjectPage = (index) => {
@@ -100,7 +99,6 @@ const showProjectPage = (index) => {
     }
     page.innerHTML = ""
     page.appendChild(createProjectPage(currProject))
-    console.log(currentPage)
 }
 
 export default {

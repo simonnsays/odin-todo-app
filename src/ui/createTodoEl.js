@@ -1,4 +1,5 @@
 import { el } from "../scripts/utils.js"
+import showTodoModal from "./showTodoModal.js"
 
 const createTodoEl = (todo) => {
     const container = el('div')
@@ -14,6 +15,10 @@ const createTodoEl = (todo) => {
     task.append(title, desc, due)
 
     todoBtn.append(flag, task)
+
+    todoBtn.addEventListener('click', () => {
+        showTodoModal.showModal(todo)
+    })
     
     const hbreak = el('div', {class: 'hb'})
 

@@ -43,11 +43,6 @@ form.addEventListener('submit', (e) => {
     dialog.close()
 })
 
-addTaskBtn.addEventListener('click', () => {
-    // Add Task from dialog to logic
-    // dialog.close()
-})
-
 function refillProjectOptions(projects) {
     if(projects.length === 0) {
         newProjEls.selectEl.innerHTML = `<option value="" disabled selected>Select Project</option>`

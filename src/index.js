@@ -3,4 +3,4 @@ import UI from "./ui/appRenderer.js";
 
 UI.startApp()
 
-document.querySelector('.todo-dialog').showModal()
+// document.querySelector('.todo-dialog').showModal()

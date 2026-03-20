@@ -13,7 +13,7 @@ const newTodo = (id) => new Todo (
     'Grab a book', 
     'Get the fee from the desk, get the latest version',
     '2026-03-14',
-    true, 
+    'med', 
     id
 )
 
@@ -28,20 +28,29 @@ const addTodo = (data, projectId) => {
     ))     
 }
 
+const editTodo = (id, newData) => {
+    const foundTodo = findTodo(id)
+
+    for(let key in newData) {
+        foundTodo[key] = newData[key]
+    }
+} 
+
+const findTodo = (id) => {
+    return projects
+    .find(project => project.todos.find(todo => todo.id = id))
+    .todos.find(todo => todo.id = id)
+}
+
 addProject('General')
-// addProject('Reading')
-// addProject('Fitness')
-// addProject('Sleep')
 
 projects[0].addToDo(newTodo())
-// projects[0].addToDo(newTodo())
-// projects[0].addToDo(newTodo())
 
 const getProjects = () => [...projects]
 
 export default {
     addProject,
-    newTodo,
     addTodo,
+    editTodo,
     getProjects
 } 
