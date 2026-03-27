@@ -20,35 +20,13 @@ const startApp = () => {
     showProjectsListPage()
     renderNav()
     addTodoModal.init({
-        onProjectAdded: renderPage
+        onProjectAdded: renderNav
     })
     showTodoModal.init({
         onTodoChange: renderPage
     })
 
     if (showingProjectsList) showProjectsListPage()
-}
-
-const testData = () => {
-    const proj = appManager.testProject('General')
-    const todo1 = appManager.addTodo({
-        title: 'grab a book',
-        description: 'Hello world',
-        dueDate: '2026-03-06',
-        priority: 'low'   
-    }, proj.id)
-    const todo2 = appManager.addTodo({
-        title: 'sick',
-        description: 'Hello new',
-        dueDate: '2026-03-09',
-        priority: 'high'   
-    }, proj.id)
-    const todo3 = appManager.addTodo({
-        title: 'runnung',
-        description: 'ajaw',
-        dueDate: '2026-05-09',
-        priority: 'med'   
-    }, proj.id)
 }
 
 const renderPage = (id = null) => {
@@ -76,7 +54,11 @@ const renderNav = (id = null) => {
     })
     projectsElNav.appendChild(navHeader)
     projects.forEach((project, index) => {
-        projectsElNav.appendChild(createProjectButton(project, () => showProjectPage(index)))
+        projectsElNav.appendChild(createProjectButton(project, {
+            onClick: () => showProjectPage(index),
+            onDelete: appManager.deleteProject,
+            onChange:  renderNav
+        }))
     })
 
     renderPage(id)
@@ -85,7 +67,6 @@ const renderNav = (id = null) => {
 // Content
 
 const createProjectListPage = (projects) => {
-    // const projects = appManager.getProjects()
     const container = el('div')
     
     const header = el('h1', {text: 'My Projects'})
@@ -98,9 +79,13 @@ const createProjectListPage = (projects) => {
     const projectsContainer = el('div', {class: 'projects-container-page'})
     projects.forEach((project, index) => {
         projectsContainer.appendChild(
-            createProjectButton(project, () => {
-                showingProjectsList = false
-                showProjectPage(index)
+            createProjectButton(project, {
+                onClick: () => {
+                    showingProjectsList = false
+                    showProjectPage(index)
+                },
+                onDelete: appManager.deleteProject,
+                onChange: renderNav  
             } 
         ))
     })

@@ -1,12 +1,11 @@
 import poundIcon from '../asset/pound.svg'
+import delIcon from '../asset/delete-outline.svg'
 import { el } from '../scripts/utils.js'
 
-const createProjectButton = (project, clickEvent) => {
-    // if(clickEvent)console.log(clickEvent)
+const createProjectButton = (project, { onClick, onDelete, onChange }) => {
     const button = el('button', {
         id: project.id,
         class: 'project', 
-        onClick: clickEvent
     })
     
     const icon = el('div', {class: 'icon'})
@@ -15,7 +14,20 @@ const createProjectButton = (project, clickEvent) => {
     
     const text = el('p', {text: project.name})
     
-    button.append(icon, text)
+    const delBtn = el('button', {class: 'del-btn'})
+    const dIcon = el('img', {src: delIcon})
+    delBtn.appendChild(dIcon)
+    
+    button.append(icon, text, delBtn)
+    button.addEventListener('click', (e) => {
+        if(e.target.closest('.del-btn')) {
+            onDelete(project.id)
+            onChange()
+            return
+        }
+
+        onClick()
+    })
     
     return button
 }

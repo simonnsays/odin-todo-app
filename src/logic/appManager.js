@@ -10,8 +10,14 @@ const addProject = (name) => {
     save()
 } 
 
+const deleteProject = (id) => {
+    projects = projects.filter(project => project.id !== id)
+
+    save()
+}
+
 const addTodo = (data, projectId) => {
-    const projIndex = projects.findIndex(project => project.id = projectId)
+    const projIndex = projects.findIndex(project => project.id === projectId)
     projects[projIndex].todos.push(
         new Todo (
             data.title,
@@ -61,8 +67,6 @@ const getProjects = () => [...projects]
 
 const save = () => {
     localStorage.setItem('projects', JSON.stringify(projects))
-
-    console.log(localStorage)
 }
 
 const load = () => {
@@ -85,7 +89,6 @@ const load = () => {
         return project;
     });
 
-    console.log(projects);
 }
 
 // test
@@ -97,6 +100,7 @@ const testProject = (name) => {
 
 export default {
     addProject,
+    deleteProject,
     findProject,
     addTodo,
     editTodo,

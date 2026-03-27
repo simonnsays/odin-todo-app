@@ -116,11 +116,25 @@ nav button:hover {
 
 .project {
     width: calc(100%);
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    justify-items: start;
     align-items: center;
     gap: 10px;
     padding-left: 10px;
     font-size: .9rem;
+}
+
+.project > button {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.project > button:hover {
+     opacity: .6;
 }
 
 .selected {
@@ -278,14 +292,19 @@ dialog .container .bottom {
     padding-top: 1px;
 }
 
-.projects-container-page button {
-    margin: 10px 0;
+.projects-container-page > button {
+    /* margin: 10px 0; */
     padding: 10px;
 }
 
 .projects-container-page button:hover {
     background-color: var(--color-primary-light);
     border-radius: 5px;
+}
+
+.projects-container-page .del-btn {
+    width: 30px;
+    height: 30px;
 }
 
 .tasks-container{

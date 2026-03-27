@@ -3,7 +3,6 @@ import appManager from "../logic/appManager.js"
 import { el } from "../scripts/utils.js"
 
 const createTodoEl = (todo, { showTodoModal, onChange, toggleTodoState }) => {
-    console.log(todo)
     const container = el('div', {class: `${todo.isComplete ? 'todo-completed' : ''}`}) 
 
     const todoBtn = el('button', {class: 'task-button'})
