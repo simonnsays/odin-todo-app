@@ -5,7 +5,8 @@ class Todo {
         this.id = id || crypto.randomUUID()
         this.title = title
         this.description = description
-        this.dueDate = format(parseISO(dueDate), "M-dd-yyyy")
+        // this.dueDate = format(parseISO(dueDate), "M-dd-yyyy")
+        this.dueDate = new Date (dueDate)
         this.priority = priority
         this.isComplete = false
     }

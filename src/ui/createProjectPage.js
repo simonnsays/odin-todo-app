@@ -2,16 +2,16 @@ import createTodoEl from "./createTodoEl.js"
 import plusIcon from '../asset/plus.svg'
 import { el } from "../scripts/utils.js"
 
-const createProjectPage = (project, { showAddTodoDialog, showTodoModal, onChange, onStateToggle }) => {
+const createProjectPage = (project, { showAddTodoDialog, showTodoModal, onChange, toggleTodoState }) => {
     const mainContainer = el('div')
     
     const header = el('h1', {text: project.name})
 
     const tasksContainer = el('div', {class: 'tasks-container   '})
 
-    const todos = project.getList()
+    const todos = project.todos
     todos.forEach(todo => {
-        tasksContainer.appendChild(createTodoEl(todo, { showTodoModal, onChange, onStateToggle }))
+        tasksContainer.appendChild(createTodoEl(todo, { showTodoModal, onChange, toggleTodoState }))
     })
 
     const pageAddTodo = el('button', {class: 'pageAddTask'})

@@ -14,7 +14,8 @@ let currentPage = {
 }
 
 const startApp = () => {
-    testData()
+    // testData()
+    if(localStorage.length > 0) appManager.load()
 
     showProjectsListPage()
     renderNav()

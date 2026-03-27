@@ -1,6 +1,6 @@
 class Project {
-    constructor(name) {
-        this.id = crypto.randomUUID()
+    constructor(name, id = null) {
+        this.id = id || crypto.randomUUID()
         this.name = name
         this.todos = []
     }

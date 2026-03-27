@@ -433,7 +433,7 @@ dialog .container .bottom {
     font-size: 1rem;
     gap: 10px;
 }
-
+ 
 .todo-bottom > .buttons > button {
     font-size: .9rem;
     width: 90px;

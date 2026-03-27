@@ -1,9 +1,9 @@
 import delIcon from "../asset/delete-outline.svg"
 import appManager from "../logic/appManager.js"
-import Project from "../scripts/Project.js"
 import { el } from "../scripts/utils.js"
 
-const createTodoEl = (todo, { showTodoModal, onChange, onStateToggle }) => {
+const createTodoEl = (todo, { showTodoModal, onChange, toggleTodoState }) => {
+    console.log(todo)
     const container = el('div', {class: `${todo.isComplete ? 'todo-completed' : ''}`}) 
 
     const todoBtn = el('button', {class: 'task-button'})
@@ -11,8 +11,8 @@ const createTodoEl = (todo, { showTodoModal, onChange, onStateToggle }) => {
     const flag = el('div', {class: `flag ${todo.isComplete ? 'flag-completed' : ''}`})
 
     flag.addEventListener('click', () => {
+        toggleTodoState(todo.id)   
         onChange(todo.id)
-        onStateToggle(todo.id)   
     })
 
     const task = el('div', {class: 'task'})

@@ -2,11 +2,12 @@ import Project from "../scripts/Project.js"
 import Todo from "../scripts/Todo.js"
 
 // Logic
-const projects = []
+let projects = []
 
 const addProject = (name) => {
     const newProject = new Project(name)
     projects.push(newProject)
+    save()
 } 
 
 const addTodo = (data, projectId) => {
@@ -17,7 +18,8 @@ const addTodo = (data, projectId) => {
             data.description,
             data.dueDate,
             data.priority
-        ))        
+        ))   
+    save()     
 }
 
 const editTodo = (id, newData) => {
@@ -27,11 +29,14 @@ const editTodo = (id, newData) => {
         foundTodo[key] = newData[key]
     }
 
+    save()
 } 
 
 const deleteTodo = (id) => {
     const project = findProject(id)
     project.todos = project.todos.filter(todo => todo.id !== id)
+
+    save()
 }
 
 const findTodo = (id) => {
@@ -48,9 +53,40 @@ const toggleTodoState = (id) => {
     const foundTodo = findTodo(id)
 
     foundTodo.isComplete = !foundTodo.isComplete
+
+    save()
 }
 
 const getProjects = () => [...projects]
+
+const save = () => {
+    localStorage.setItem('projects', JSON.stringify(projects))
+
+    console.log(localStorage)
+}
+
+const load = () => {
+    const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+
+    projects = storedProjects.map(pData => {
+        const project = new Project(pData.name, pData.id);
+        
+        // Recreate the nested Todo instances
+        project.todos = pData.todos.map(tData => 
+            new Todo(
+                tData.title,
+                tData.description,
+                tData.dueDate,
+                tData.priority,
+                tData.id
+            )
+        );
+
+        return project;
+    });
+
+    console.log(projects);
+}
 
 // test
 const testProject = (name) => {
@@ -67,5 +103,6 @@ export default {
     deleteTodo,
     toggleTodoState,
     getProjects,
-    testProject
+    testProject,
+    load
 } 
