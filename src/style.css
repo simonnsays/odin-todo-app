@@ -295,7 +295,8 @@ dialog .container .bottom {
 }
 
 .task-button {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     width: 100%;
     margin: 10px 0;
 }
@@ -436,4 +437,27 @@ dialog .container .bottom {
 .todo-bottom > .buttons > button {
     font-size: .9rem;
     width: 90px;
+}
+
+.todo-completed {
+    opacity: .4;
+}
+
+.modal-completed {
+    color: rgba(0, 0, 0, .4);
+}
+
+.flag-completed {
+    background-image: url('./asset/check.svg');
+    background-color: var(--color-primary-light);
+    opacity: .4;
+}
+
+.del-button {
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    align-self: center;
+    transform: translateY(-5px);
+    opacity: .6;
 }

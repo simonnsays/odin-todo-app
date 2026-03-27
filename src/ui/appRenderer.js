@@ -14,6 +14,21 @@ let currentPage = {
 }
 
 const startApp = () => {
+    testData()
+
+    showProjectsListPage()
+    renderNav()
+    addTodoModal.init({
+        onProjectAdded: renderPage
+    })
+    showTodoModal.init({
+        onTodoChange: renderPage
+    })
+
+    if (showingProjectsList) showProjectsListPage()
+}
+
+const testData = () => {
     const proj = appManager.testProject('General')
     const todo1 = appManager.addTodo({
         title: 'grab a book',
@@ -33,35 +48,18 @@ const startApp = () => {
         dueDate: '2026-05-09',
         priority: 'med'   
     }, proj.id)
-
-    // console.log(proj)
-    // console.log(appManager.getProjects())
-
-
-
-    showProjectsListPage()
-    renderNav()
-    addTodoModal.init({
-        onProjectAdded: renderPage
-    })
-    showTodoModal.init({
-        onTodoChange: renderPage
-    })
-
-    if (showingProjectsList) showProjectsListPage()
 }
 
 const renderPage = (id = null) => {
-    renderNav()
-
     const projects = appManager.getProjects()
-    const alteredProject = projects.find(project => project.id === id)
+    let alteredProject = projects.find(project => project.id === id)
+    if(!alteredProject) alteredProject = appManager.findProject(id)
 
     if(alteredProject?.id === currentPage.id) showProjectPage(projects.findIndex(project => project.id === alteredProject.id))
     if(currentPage.type === 'list') showProjectsListPage()
 }
 
-const renderNav = () => {
+const renderNav = (id = null) => {
     // render nav here
     const projects = appManager.getProjects()
     const projectsElNav = document.querySelector('.projects-container-nav .projects')
@@ -79,6 +77,8 @@ const renderNav = () => {
     projects.forEach((project, index) => {
         projectsElNav.appendChild(createProjectButton(project, () => showProjectPage(index)))
     })
+
+    renderPage(id)
 }
 
 // Content
@@ -90,7 +90,7 @@ const createProjectListPage = (projects) => {
     const header = el('h1', {text: 'My Projects'})
 
     const countContainer = el('div', {class: 'count-container'})
-    const countText = el('p', {text: `${projects.length} ${projects.length > 1 ? 'projects' : 'project'}`})
+    const countText = el('p', {text: `${projects.length} ${projects.length === 1 ? 'project' : 'projects'}`})
     const hb = el('div', {class: 'hb'})
     countContainer.append(countText, hb)
 
@@ -126,7 +126,12 @@ const showProjectPage = (index) => {
         id: currProject?.id
     }
     page.innerHTML = ""
-    page.appendChild(createProjectPage(currProject))
+    page.appendChild(createProjectPage(currProject, {
+        showAddTodoDialog: addTodoModal.showAddTodoDialog,
+        showTodoModal: showTodoModal.showModal,
+        toggleTodoState: appManager.toggleTodoState,
+        onStateToggle: renderPage
+    }))
 }
 
 export default {

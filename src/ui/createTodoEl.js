@@ -1,12 +1,17 @@
+import delIcon from "../asset/delete-outline.svg"
 import { el } from "../scripts/utils.js"
-import showTodoModal from "./showTodoModal.js"
 
-const createTodoEl = (todo) => {
-    const container = el('div')
+const createTodoEl = (todo, { showTodoModal, toggleTodoState, onStateToggle }) => {
+    const container = el('div', {class: `${todo.isComplete ? 'todo-completed' : ''}`}) 
 
     const todoBtn = el('button', {class: 'task-button'})
 
-    const flag = el('div', {class: 'flag'})
+    const flag = el('div', {class: `flag ${todo.isComplete ? 'flag-completed' : ''}`})
+
+    flag.addEventListener('click', () => {
+        toggleTodoState(todo.id)
+        onStateToggle(todo.id)   
+    })
 
     const task = el('div', {class: 'task'})
     const title = el('p', {class: 'title', text: todo.title}) 
@@ -14,10 +19,15 @@ const createTodoEl = (todo) => {
     const due = el('p', {class: 'due', text: todo.interpretDate()})
     task.append(title, desc, due)
 
-    todoBtn.append(flag, task)
+    const delBtn = el('button', {class: 'del-button'})
+    const icon = el('img', {src: delIcon})
+    delBtn.appendChild(icon)
 
-    todoBtn.addEventListener('click', () => {
-        showTodoModal.showModal(todo)
+    todoBtn.append(flag, task, delBtn)
+
+    todoBtn.addEventListener('click', (e) => {
+        if (e.target.closest('.flag')) return     
+        showTodoModal(todo)
     })
     
     const hbreak = el('div', {class: 'hb'})

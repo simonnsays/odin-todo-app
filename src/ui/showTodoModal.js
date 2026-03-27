@@ -24,6 +24,10 @@ const showModal = (todo) => {
     desc.textContent = todo.description
     date.value = format(todo.dueDate, 'yyyy-MM-dd')
     prio.value = todo.priority
+
+    modal.classList.toggle('modal-completed', todo.isComplete)
+    flag.classList.toggle('flag-completed', todo.isComplete)
+
 }
 
 cancelBtn.addEventListener('click', () => {
@@ -48,6 +52,7 @@ saveBtn.addEventListener('click', () => {
 flag.addEventListener('click', () => {
     appManager.toggleTodoState(todoRef.id)
     onTodoChange(appManager.findProject(todoRef.id).id)
+    showModal(todoRef)
 })
 
 export default {

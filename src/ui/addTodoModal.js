@@ -6,7 +6,6 @@ let onProjectAdded
 const navAddBtn = select('#addToDo')
 const dialog = select('dialog')
 const cancelBtn = select('#cancel')
-const addTaskBtn = select('#addTask')
 const newProjEls = {
     selectEl: select('#destination'),
     addBtn: select('#addProject'),
@@ -35,16 +34,13 @@ form.addEventListener('submit', (e) => {
     const projectId = select('#destination').value
 
     appManager.addTodo({
-        title: data.get('todo_~title'),
+        title: data.get('todo_title'),
         description: data.get('todo_description'),
         dueDate: data.get('todo_dueDate'),
         priority: data.get('todo_priority'),
     }, projectId)
-
-        
    
     if(onProjectAdded) onProjectAdded(projectId)
-
 
     form.reset()
     dialog.close()
