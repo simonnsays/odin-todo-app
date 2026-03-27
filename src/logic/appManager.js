@@ -29,6 +29,11 @@ const editTodo = (id, newData) => {
 
 } 
 
+const deleteTodo = (id) => {
+    const project = findProject(id)
+    project.todos = project.todos.filter(todo => todo.id !== id)
+}
+
 const findTodo = (id) => {
     return findProject(id)
     .todos.find(todo => todo.id === id)
@@ -59,6 +64,7 @@ export default {
     findProject,
     addTodo,
     editTodo,
+    deleteTodo,
     toggleTodoState,
     getProjects,
     testProject

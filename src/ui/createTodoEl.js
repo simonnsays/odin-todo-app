@@ -1,7 +1,9 @@
 import delIcon from "../asset/delete-outline.svg"
+import appManager from "../logic/appManager.js"
+import Project from "../scripts/Project.js"
 import { el } from "../scripts/utils.js"
 
-const createTodoEl = (todo, { showTodoModal, toggleTodoState, onStateToggle }) => {
+const createTodoEl = (todo, { showTodoModal, onChange, onStateToggle }) => {
     const container = el('div', {class: `${todo.isComplete ? 'todo-completed' : ''}`}) 
 
     const todoBtn = el('button', {class: 'task-button'})
@@ -9,7 +11,7 @@ const createTodoEl = (todo, { showTodoModal, toggleTodoState, onStateToggle }) =
     const flag = el('div', {class: `flag ${todo.isComplete ? 'flag-completed' : ''}`})
 
     flag.addEventListener('click', () => {
-        toggleTodoState(todo.id)
+        onChange(todo.id)
         onStateToggle(todo.id)   
     })
 
@@ -22,11 +24,16 @@ const createTodoEl = (todo, { showTodoModal, toggleTodoState, onStateToggle }) =
     const delBtn = el('button', {class: 'del-button'})
     const icon = el('img', {src: delIcon})
     delBtn.appendChild(icon)
+    delBtn.addEventListener('click', () => {
+        const proejectRef = appManager.findProject(todo.id)
+        appManager.deleteTodo(todo.id)
+        onChange(proejectRef.id )
+    })
 
     todoBtn.append(flag, task, delBtn)
 
     todoBtn.addEventListener('click', (e) => {
-        if (e.target.closest('.flag')) return     
+        if (e.target.closest('.flag') || e.target.closest('.del-button')) return     
         showTodoModal(todo)
     })
     

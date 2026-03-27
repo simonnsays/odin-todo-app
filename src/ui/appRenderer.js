@@ -130,7 +130,7 @@ const showProjectPage = (index) => {
         showAddTodoDialog: addTodoModal.showAddTodoDialog,
         showTodoModal: showTodoModal.showModal,
         toggleTodoState: appManager.toggleTodoState,
-        onStateToggle: renderPage
+        onChange: renderPage
     }))
 }
 
