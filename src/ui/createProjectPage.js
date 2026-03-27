@@ -16,7 +16,6 @@ const createProjectPage = (project) => {
     })
 
     const pageAddTodo = el('button', {class: 'pageAddTask'})
-    
     const icon = el('div', {class: 'icon'})
     const img = el('img', {src: plusIcon})
     icon.appendChild(img)

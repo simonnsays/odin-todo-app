@@ -303,7 +303,7 @@ dialog .container .bottom {
 .flag {
     width: 13px;
     height: 13px;
-    border: 2px solid salmon;
+    border: 3px solid var(--color-primary);
     flex-shrink: 0;
     border-radius: 50%;
     opacity: 1;
@@ -362,89 +362,78 @@ dialog .container .bottom {
 
 .todo-dialog .container {
     min-width: 40vw;
-    min-height: 65vh;
+    height: 65vh;
     position: relative;
     margin:0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     /* overflow: hidden; */
 }
 
-.content {
+.todo-dialog .title {
+    /* background-color: green; */
+    display: flex;
     overflow: auto;
-}
-
-.content .flag {
-    border: 3px solid salmon;
-    height: 18px;
-    width: 18px;
-    background-color: var(--color-surface);
-}
-
-.content .title {
-    display: flex;
-    font-size: 1.5rem;
-    font-weight: 600;
-    align-items: center;
+    width: 100%;
     gap: 5px;
+    align-items: center;
 }
 
-.content .title > p {
-    padding: 8px;
+.title .flag {
+    width: 25px;
+    height: 25px;
+}
+
+.todo-dialog .title p {
+    max-width: 90%;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 5px 0;
     border-radius: 5px;
-    /* box-sizing: border-box; */
-} 
-
-.content .title p:focus {
-    /* border: 1px solid black; */
-        border: 2px solid gray;
-
+    padding: 5px;
+    outline: none;
 }
 
-.content .description {
-    margin-top: 5px;
-    font-size: .9rem;
-    line-height: 23px;
-    padding: 10px 30px 65px;
+[contenteditable="true"]:focus {
+    border:2px solid rgba(0, 0, 0, .4);
     border-radius: 5px;
 }
 
-.content .description:focus{
-    border: 2px solid gray;
+.todo-dialog .description {
+    /* background-color: yellow; */
+    overflow: auto;
+    /* padding: 5px 5px 5px 35px; */
+    margin-left: 32px;
+    padding: 5px;
+    min-height: 30px;
 }
 
-.todo-bottom {
+.todo-dialog .todo-bottom {
+    /* background-color: silver; */
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    /* background-color: red; */
+    flex-shrink: 1;
 }
 
-.todo-bottom > :nth-child(1),
-.todo-bottom > :nth-child(2) {
-    /* background-color: yellow; */
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.todo-bottom .buttons{
-    margin-left: 10px;
+.todo-bottom .todo-info {
     display: flex;
     gap: 20px;
-    /* background-color: blue; */
+}
+
+.todo-info > div > label {
+    margin-right: 5px;
+}
+
+.todo-bottom > .buttons  {
+    justify-self: end ; 
+    display: flex;
+    font-size: 1rem;
+    gap: 10px;
 }
 
 .todo-bottom > .buttons > button {
-    background-color: var(--color-primary);
-    border: none;
-    border-radius: 5px;
-    height: 35px;
-    font-size: 1rem;
-    display: grid;
-    place-content: center;
-    padding: 14px;
-    /* width: 50px; */
-
+    font-size: .9rem;
+    width: 90px;
 }

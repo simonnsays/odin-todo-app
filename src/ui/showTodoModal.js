@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { el, select } from "../scripts/utils.js";
+import { select } from "../scripts/utils.js";
 import appManager from "../logic/appManager.js";
 
 const modal = select('.todo-dialog')
@@ -7,13 +7,17 @@ const saveBtn = select('#editSave')
 const cancelBtn = select('#editCancel') // close button as well
 const flag = select('.todo-dialog .flag')
 const title = select('.todo-dialog .title p')
-const desc = select('.content .description')
+const desc = select('.todo-dialog .description')
 const date = select('#date')
 const prio = select('#showPrio')
 let todoRef
+let onTodoChange
+
+const init = (callback) => {
+    onTodoChange = callback.onTodoChange
+}
 
 const showModal = (todo) => {
-    console.log(flag)
     todoRef = todo
     modal.showModal()
     title.textContent = todo.title
@@ -36,9 +40,17 @@ saveBtn.addEventListener('click', () => {
 
     appManager.editTodo(todoRef.id, newData)
 
+    onTodoChange(appManager.findProject(todoRef.id).id)
+
     modal.close()
 })
 
+flag.addEventListener('click', () => {
+    appManager.toggleTodoState(todoRef.id)
+    onTodoChange(appManager.findProject(todoRef.id).id)
+})
+
 export default {
+    init,
     showModal
 }

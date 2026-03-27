@@ -34,7 +34,14 @@ form.addEventListener('submit', (e) => {
     const data = new FormData(form)
     const projectId = select('#destination').value
 
-    appManager.addTodo(data, projectId)
+    appManager.addTodo({
+        title: data.get('todo_~title'),
+        description: data.get('todo_description'),
+        dueDate: data.get('todo_dueDate'),
+        priority: data.get('todo_priority'),
+    }, projectId)
+
+        
    
     if(onProjectAdded) onProjectAdded(projectId)
 

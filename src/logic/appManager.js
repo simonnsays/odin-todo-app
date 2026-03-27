@@ -9,23 +9,15 @@ const addProject = (name) => {
     projects.push(newProject)
 } 
 
-const newTodo = (id) => new Todo (
-    'Grab a book', 
-    'Get the fee from the desk, get the latest version',
-    '2026-03-14',
-    'med', 
-    id
-)
-
 const addTodo = (data, projectId) => {
     const projIndex = projects.findIndex(project => project.id = projectId)
     projects[projIndex].todos.push(
         new Todo (
-        data.get('todo_title'),
-        data.get('todo_description'),
-        data.get('todo_dueDate'),
-        data.get('todo_priority'),
-    ))     
+            data.title,
+            data.description,
+            data.dueDate,
+            data.priority
+        ))        
 }
 
 const editTodo = (id, newData) => {
@@ -34,23 +26,40 @@ const editTodo = (id, newData) => {
     for(let key in newData) {
         foundTodo[key] = newData[key]
     }
+
 } 
 
 const findTodo = (id) => {
-    return projects
-    .find(project => project.todos.find(todo => todo.id = id))
-    .todos.find(todo => todo.id = id)
+    return findProject(id)
+    .todos.find(todo => todo.id === id)
 }
 
-addProject('General')
+const findProject = (todoId) => {
+    return projects
+    .find(project => project.todos.find(todo => todo.id === todoId))
+}
 
-projects[0].addToDo(newTodo())
+const toggleTodoState = (id) => {
+    const foundTodo = findTodo(id)
+
+    foundTodo.isComplete = !foundTodo.isComplete
+}
 
 const getProjects = () => [...projects]
 
+// test
+const testProject = (name) => {
+    const newProject = new Project(name)
+    projects.push(newProject)
+    return newProject
+}
+
 export default {
     addProject,
+    findProject,
     addTodo,
     editTodo,
-    getProjects
+    toggleTodoState,
+    getProjects,
+    testProject
 } 
